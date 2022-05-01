@@ -131,6 +131,7 @@ app.get('/app/flip/call/tails', (req, res) => {
 if (args.debug || args.d) {
   app.get('/app/log/access/', (req, res, next) => {
       const stmt = db.prepare("SELECT * FROM accesslog").all();
+      console.log(stmt);
     res.status(200).json(stmt);
   })
 
