@@ -5,7 +5,7 @@ import { countFlips } from './modules/coin.mjs';
 import { flipACoin } from './modules/coin.mjs';
 import minimist from 'minimist';
 import express from 'express';
-import { db } from 'database.js';
+import { db } from './database.js';
 
 // Require Express.js
 const app = express()
