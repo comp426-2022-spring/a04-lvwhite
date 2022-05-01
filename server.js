@@ -7,6 +7,7 @@ import minimist from 'minimist';
 import express from 'express';
 import db from './database.js';
 import fs from 'fs';
+import morgan from 'morgan';
 
 // Require Express.js
 const app = express()
