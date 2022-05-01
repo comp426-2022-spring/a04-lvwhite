@@ -30,4 +30,4 @@ if (row === undefined) {
 }
 
 // Export all of the above as a module so that we can use it elsewhere.
-module.exports = db
+export default db;
