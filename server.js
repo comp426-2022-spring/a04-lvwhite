@@ -60,11 +60,17 @@ if (args.help || args.h) {
     process.exit(0)
 }
 
-// Use morgan for logging to files
-// Create a write stream to append (flags: 'a') to a file
-const accessLog = fs.createWriteStream( logdir+'access.log', { flags: 'a' })
-// Set up the access logging middleware
-app.use(morgan('combined', { stream: accessLog }))
+if (args.log == 'false') {
+  console.log("Not creating access.log")
+} else {
+  const logdir = './log/';
+
+  if (!fs.existsSync(logdir)){
+      fs.mkdirSync(logdir);
+  }
+  const accessLog = fs.createWriteStream( logdir+'access.log', { flags: 'a' })
+  app.use(morgan('combined', { stream: accessLog }))
+}
 
 var argv = minimist(process.argv.slice(2));
 var port = argv['port'] || 5555;
