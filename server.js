@@ -6,6 +6,7 @@ import { flipACoin } from './modules/coin.mjs';
 import minimist from 'minimist';
 import express from 'express';
 import { db } from 'database.js';
+
 // Require Express.js
 const app = express()
 
@@ -46,7 +47,7 @@ app.use( (req, res, next) => {
     referer: req.headers['referer'],
     useragent: req.headers['user-agent']
   }
-  const stmt = logdb.prepare('INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referrer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+  const stmt = db.prepare('INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referrer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
   const info = stmt.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.protocol, logdata.httpversion, logdata.status, logdata.referrer, logdata.useragent)
   //console.log(info)
   next();
@@ -122,7 +123,7 @@ app.get('/app/flip/call/tails', (req, res) => {
 
 if (args.debug || args.d) {
   app.get('/app/log/access/', (req, res, next) => {
-      const stmt = logdb.prepare("SELECT * FROM accesslog").all();
+      const stmt = db.prepare("SELECT * FROM accesslog").all();
     res.status(200).json(stmt);
   })
 
