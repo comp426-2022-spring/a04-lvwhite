@@ -66,7 +66,7 @@ const accessLog = fs.createWriteStream( logdir+'access.log', { flags: 'a' })
 app.use(morgan('combined', { stream: accessLog }))
 
 var argv = minimist(process.argv.slice(2));
-var port = argv['port'] || 5000;
+var port = argv['port'] || 5555;
 //args["port"]
 //const port = process.env.PORT || 5000
 // Start an app server
@@ -101,7 +101,6 @@ app.get('/app/flips/:number', (req, res) => {
   let second = countFlips(numOfFlips);
   let str = JSON.stringify(second)
   //console.log(str1);
-  //nothing
   res.end("{\"raw\":" + str1 + ",\"summary\":" + str + "}");
 });
 
